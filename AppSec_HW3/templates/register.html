@@ -1,0 +1,15 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<h2>Register</h2>
+{% from "_formhelpers.html" import render_field %}
+<div class="form">
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+        {{ render_field(form.username) }}
+        {{ render_field(form.password) }}
+        {{ render_field(form.confirm_password) }}
+        <p><input type="submit" value="Submit"></p>
+    </form>
+    </p>
+    {% endblock %}

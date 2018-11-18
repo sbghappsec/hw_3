@@ -1,0 +1,38 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<h2>Your Uploads</h2>
+<table>
+    <tr>
+        <th>File Name</th>
+        <th>Content</th>
+        <th>Errors</th>
+    </tr>
+{% for item in uploads %}
+<tr>
+        <th>{{ item[0] }}</th>
+        <th>
+        {% set content_split = item[1].split() %}
+        {% for word in content_split %}
+            {% if item[0] in errors.keys() and word.strip(":;-,!_?)(&*$#)./'\"") in errors[item[0]].keys() %}
+                <a class="spelling_error">{{ word }}</a>
+            {% else %}
+                {{ word }}
+            {% endif %}
+
+        {% endfor %}
+        </th>
+        <th>
+        {% if item[0] in errors.keys() %}
+            {% for e in errors[item[0]].keys() %}
+                Error: <a class="spelling_error">{{ e }}</a> 
+                Suggestions: <a class="suggestion">{{ errors[item[0]][e] }}</a>
+                <br>
+            {% endfor %}
+        {% endif %}
+    </th>
+</tr>   
+{% endfor %}
+
+</table>    
+{% endblock %} 

@@ -1,0 +1,14 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<h2>Upload a file to spell check</h2>
+<h3>If you have uploaded 5 or more files so far, they WILL be deleted if you upload another file. Storage limit is 5.</h3>
+{% from "_formhelpers.html" import render_field %}
+<div class="form">
+    <form method="POST" action="" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+        {{ render_field(form.upload) }}
+        <p><input type="submit" value="Submit"></p>
+    </form>
+</div>
+{% endblock %}

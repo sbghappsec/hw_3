@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Spell Checker</title>
+    <style>
+        h1,
+        h2,
+        h3 {
+            text-align: center
+        }
+
+        .nav {
+            background-color: yellow;
+            text-align: center;
+            font-size: 24px;
+        }
+
+        .message {
+            /* background-color: red; */
+            color: red;
+            text-align: center;
+            font-size: 30px;
+        }
+
+        .result {
+            font-size: 25px;
+            color: blue;
+        }
+
+        .spelling_error {
+            background-color: red;
+        }
+
+        .suggestion {
+            background-color: green;
+        }
+
+        .form {
+            text-align: center;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <h1><a href='/'>Spell Check</a></h1>
+    <div class="nav">
+        {% if 'username' not in session %}
+        <a href='/register'>Register</a>
+        <a href='/login'>Log In</a>
+        {% endif %}
+
+        {% if 'username' in session %}
+        <a href='/spellcheck'>Spell Check</a>
+        <a href='/uploads'>Your Uploads</a>
+        <a href='/logout'>Logout</a>
+        <p>You are currenly logged in as {{ session['username'] }}</p>
+        {% endif %}
+    </div>
+    <!-- Display messages or errors that may have occured -->
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+    <div class="message">
+        {{ message }}
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+    {% block body %} {% endblock %}
+</body>
+
+</html>
